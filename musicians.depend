@@ -1,0 +1,24 @@
+# depslib dependency file v1.0
+1683644424 source:c:\users\usuario\desktop\tup\laboratorio ii\tp-1-parcial\musicians\main.cpp
+	<iostream>
+	<ctime>
+	<locale>
+	<cstdlib>
+	<cstring>
+	<ctime>
+	"functions.h"
+	"Date.h"
+	"clsMusician.h"
+	"clsMusicianFile.h"
+	"menus.h"
+
+1683674655 c:\users\usuario\desktop\tup\laboratorio ii\tp-1-parcial\musicians\date.h
+
+1683675187 c:\users\usuario\desktop\tup\laboratorio ii\tp-1-parcial\musicians\clsmusician.h
+
+1683675407 c:\users\usuario\desktop\tup\laboratorio ii\tp-1-parcial\musicians\clsmusicianfile.h
+
+1683640648 c:\users\usuario\desktop\tup\laboratorio ii\tp-1-parcial\musicians\functions.h
+
+1683643208 c:\users\usuario\desktop\tup\laboratorio ii\tp-1-parcial\musicians\menus.h
+
