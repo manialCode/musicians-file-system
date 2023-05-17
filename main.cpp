@@ -1,6 +1,5 @@
 #include <iostream>
 #include <ctime>
-#include <locale>
 #include <cstdlib>
 #include <cstring>
 #include <ctime>
@@ -17,10 +16,13 @@ const char *GENRES_BACK_UP = "Generos.bak";
 #include "Date.h"
 #include "clsMusician.h"
 #include "clsMusicianFile.h"
+#include "clsGenre.h"
+#include "clsGenreFile.h"
+#include "reportes.h"
 #include "menus.h"
 
 int main()
 {
-    menuMusicians();
+    mainMenu();
     return 0;
 }

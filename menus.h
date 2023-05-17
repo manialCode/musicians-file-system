@@ -71,12 +71,157 @@ void menuMusicians()
             std::cout << std::endl;
             std::cout << "SALIENDO DEL MENU `MÚSICOS`" << std::endl;
             std::cout << std::endl;
-            system("pause");
             break;
         default:
             break;
         }
     }
 }
+
+void genreMenu()
+{
+
+    int op = 1;
+    bool condition = true;
+    GenreFile obj(GENRES_FILE);
+
+    while (condition)
+    {
+        system("cls");
+        cout << "         MENU GÉNEROS-";
+        cout << endl;
+        cout << "-------------------------------";
+        cout << endl;
+        cout << "1) AGREGAR GENERO";
+        cout << endl;
+        cout << "2) LISTAR GENERO POR ID";
+        cout << endl;
+        cout << "3) LISTAR TODO";
+        cout << endl;
+        cout << "4) MODIFICAR AÑO DE ORIGEN";
+        cout << endl;
+        cout << "5) ELIMINAR REGISTRO";
+        cout << endl;
+        cout << "-------------------------------";
+        cout << endl;
+        cout << "0) VOLVER AL MENU PRINCIPAL";
+        cout << endl;
+        cout << endl;
+        cout << "INGRESE OPCIÓN: ";
+        cin >> op;
+
+        switch (op)
+        {
+
+        case 1:
+            system("cls");
+            obj.addRecord();
+            system("pause");
+            break;
+        case 2:
+            system("cls");
+            obj.listByID();
+            system("pause");
+            break;
+        case 3:
+            system("cls");
+            obj.showFile();
+            system("pause");
+            break;
+
+        case 4:
+            system("cls");
+            if (obj.changeOriginDate())
+                std::cout << "Cambio de fecha exitoso" << std::endl;
+            else
+                std::cout << "No se ah podido realizar el cambio" << std::endl;
+            system("pause");
+            break;
+
+        case 5:
+            system("cls");
+            if (obj.toCancel())
+                std::cout << "Dado de baja con éxito" << std::endl;
+            else
+                std::cout << "Ah habido un problema al dar de baja" << std::endl;
+            system("pause");
+            break;
+
+        case 0:
+            condition = false;
+            std::cout << std::endl;
+            std::cout << "SALIENDO DEL MENU `GENEROS`" << std::endl;
+            std::cout << std::endl;
+
+        default:
+            break;
+        }
+    }
+}
+
+void configurationMenu()
+{
+    // TODO
+}
+
+void mainMenu()
+{
+    int option;
+    bool condition = true;
+
+    while (condition)
+    {
+        system("cls");
+        std::cout << "MENU MÚSICOS" << std::endl;
+        std::cout << "------------------" << std::endl;
+        std::cout << std::endl;
+
+        std::cout << "1) MENU MUSICOS" << std::endl;
+        std::cout << "2) MENU GENEROS" << std::endl;
+        std::cout << "3) REPORTES" << std::endl;
+        std::cout << "4) CONFIGURACIÓN" << std::endl;
+        std::cout << std::endl;
+        std::cout << "--------------------------------" << std::endl;
+        std::cout << std::endl;
+        std::cout << "0) FIN DEL PROGRAMA" << std::endl;
+
+        std::cout << std::endl;
+        std::cout << "Ingresa tu opción: ";
+        std::cin >> option;
+
+        switch (option)
+        {
+        case 1:
+            system("cls");
+            menuMusicians();
+            system("pause");
+            break;
+        case 2:
+            system("cls");
+            genreMenu();
+            system("pause");
+            break;
+        case 3:
+            system("cls");
+            // reportsMenu();
+            system("pause");
+            break;
+        case 4:
+            system("cls");
+            configurationMenu();
+            system("pause");
+            break;
+        case 0:
+            condition = false;
+            std::cout << std::endl;
+            std::cout << "FIN DEL PROGRAMA" << std::endl;
+            std::cout << std::endl;
+            system("pause");
+            break;
+        default:
+            break;
+        }
+    }
+};
 
 #endif // MENUS_H_INCLUDED

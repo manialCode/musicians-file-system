@@ -33,11 +33,15 @@
 			<Add option="-fexceptions" />
 		</Compiler>
 		<Unit filename="Date.h" />
+		<Unit filename="clsGenre.h" />
+		<Unit filename="clsGenreFile.h" />
+		<Unit filename="clsGenres.h" />
 		<Unit filename="clsMusician.h" />
 		<Unit filename="clsMusicianFile.h" />
 		<Unit filename="functions.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="menus.h" />
+		<Unit filename="reportes.h" />
 		<Extensions>
 			<lib_finder disable_auto="1" />
 		</Extensions>

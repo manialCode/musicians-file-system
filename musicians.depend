@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1683644424 source:c:\users\usuario\desktop\tup\laboratorio ii\tp-1-parcial\musicians\main.cpp
+1684362076 source:c:\users\usuario\desktop\tup\laboratorio ii\tp-1-parcial\musicians\main.cpp
 	<iostream>
 	<ctime>
 	<locale>
@@ -10,15 +10,24 @@
 	"Date.h"
 	"clsMusician.h"
 	"clsMusicianFile.h"
+	"clsGenre.h"
+	"clsGenreFile.h"
+	"reportes.h"
 	"menus.h"
 
 1683674655 c:\users\usuario\desktop\tup\laboratorio ii\tp-1-parcial\musicians\date.h
 
 1683675187 c:\users\usuario\desktop\tup\laboratorio ii\tp-1-parcial\musicians\clsmusician.h
 
-1683675407 c:\users\usuario\desktop\tup\laboratorio ii\tp-1-parcial\musicians\clsmusicianfile.h
+1684108204 c:\users\usuario\desktop\tup\laboratorio ii\tp-1-parcial\musicians\clsmusicianfile.h
 
 1683640648 c:\users\usuario\desktop\tup\laboratorio ii\tp-1-parcial\musicians\functions.h
 
-1683643208 c:\users\usuario\desktop\tup\laboratorio ii\tp-1-parcial\musicians\menus.h
+1684365318 c:\users\usuario\desktop\tup\laboratorio ii\tp-1-parcial\musicians\menus.h
+
+1684363074 c:\users\usuario\desktop\tup\laboratorio ii\tp-1-parcial\musicians\reportes.h
+
+1684365597 c:\users\usuario\desktop\tup\laboratorio ii\tp-1-parcial\musicians\clsgenre.h
+
+1684365376 c:\users\usuario\desktop\tup\laboratorio ii\tp-1-parcial\musicians\clsgenrefile.h
 
