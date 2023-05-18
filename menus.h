@@ -159,6 +159,67 @@ void genreMenu()
     }
 }
 
+void reportsMenu()
+{
+    int option;
+    bool condition = true;
+    BateristFile obj(INSTRUMEN_FILE);
+
+    while (condition)
+    {
+        system("cls");
+        std::cout << "MENU REPORTES" << std::endl;
+        std::cout << "------------------" << std::endl;
+        std::cout << std::endl;
+
+        std::cout << "1) MOSTRAR PIANISTAS" << std::endl;
+        std::cout << "2) PAISES CON MENOS DE 3 GENEROS" << std::endl;
+        std::cout << "3) CREAR ARCHIVO DE BATERISTAS" << std::endl;
+        std::cout << "4) MOSTRAR ARCHIVO DE BATERISTAS" << std::endl;
+        std::cout << std::endl;
+        std::cout << "--------------------------------" << std::endl;
+        std::cout << std::endl;
+        std::cout << "0) FIN DEL PROGRAMA" << std::endl;
+
+        std::cout << std::endl;
+        std::cout << "Ingresa tu opción: ";
+        std::cin >> option;
+
+        switch (option)
+        {
+        case 1:
+            system("cls");
+            showPianist();
+            system("pause");
+            break;
+        case 2:
+            system("cls");
+            threeCountries();
+            system("pause");
+            break;
+        case 3:
+            system("cls");
+            obj.createBaterist();
+            system("pause");
+            break;
+        case 4:
+            system("cls");
+            obj.showFile();
+            system("pause");
+            break;
+        case 0:
+            condition = false;
+            std::cout << std::endl;
+            std::cout << "SALIENDO DEL MENU `REPORTES`" << std::endl;
+            std::cout << std::endl;
+            system("pause");
+            break;
+        default:
+            break;
+        }
+    }
+}
+
 void configurationMenu()
 {
     // TODO
@@ -203,7 +264,7 @@ void mainMenu()
             break;
         case 3:
             system("cls");
-            // reportsMenu();
+            reportsMenu();
             system("pause");
             break;
         case 4:

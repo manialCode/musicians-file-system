@@ -124,7 +124,7 @@ void Musicians::setProperties()
 
     std::cout << " Tipo de música: ";
     std::cin >> auxInt;
-    if (auxInt >= 1 && auxInt <= 4)
+    if (auxInt >= 1 && auxInt <= 10)
         setMusicType(auxInt);
     else
     {
@@ -142,7 +142,7 @@ void Musicians::setProperties()
 
     std::cout << "Matricula$: ";
     std::cin >> auxFloat;
-    if (auxFloat > 0)
+    if (auxFloat >= 0)
         setRegistration(auxFloat);
     else
     {

@@ -49,12 +49,17 @@ int GenreFile::getIDPosition(int index)
 int ID = 0;
 void GenreFile::addRecord()
 {
-    ID++;
     Genre obj;
     FILE *pGen;
     pGen = fopen(name, "ab");
 
+    if (pGen == NULL)
+    {
+        std::cout << "NO SE PUDO ACCEDER/CREAR EL ARCHIVO" << std::endl;
+        return;
+    }
     obj.setProperties();
+    ID++;
     obj.setId(ID);
     fwrite(&obj, sizeof(Genre), 1, pGen);
 

@@ -50,7 +50,7 @@ void MusicianFile::addRecord()
         return;
     }
 
-    if ((obj.getDepartment() > 0 && obj.getDepartment() < 5) && (obj.getMainInstrument() >= 1 && obj.getMainInstrument() <= 15) && (obj.getMusicType() >= 1 && obj.getMusicType() <= 4) && obj.getRegistration() > 0)
+    if ((obj.getDepartment() > 0 && obj.getDepartment() < 5) && (obj.getMainInstrument() >= 1 && obj.getMainInstrument() <= 15) && (obj.getMusicType() >= 1 && obj.getMusicType() <= 10))
     {
         fwrite(&obj, sizeof(Musicians), 1, filePointer);
         std::cout << std::endl;
@@ -99,7 +99,7 @@ void MusicianFile::listByDni()
     system("cls");
 
     int check = getDniPosition(dni);
-    if (check > 0)
+    if (check >= 0)
     {
         while (fread(&instance, sizeof instance, 1, filePointer) == 1)
         {
