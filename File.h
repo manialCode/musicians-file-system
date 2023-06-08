@@ -10,16 +10,16 @@ public:
     File(const char *name_ = "") { strcpy(this->name, name_); };
 
     void showFile(int indicator, Musicians obj);
-    void showFile(int indicator, Genre obj);
-    void showFile(int indicator, Instrument obj);
-    void showFile(int indicator, Country obj);
-
+    /*void showFile(int indicator, Genre obj);
+     void showFile(int indicator, Instrument obj);
+     void showFile(int indicator, Country obj);
+*/
     int countRecords(int indicator);
 
     bool changeRecord(int index, Musicians obj);
     bool changeRecord(int index, Genre obj);
-    bool changeRecord(int index, Instrument obj);
-    bool changeRecord(int index, Country obj);
+    // bool changeRecord(int index, Instrument obj);
+    // bool changeRecord(int index, Country obj);
 };
 
 // Show Files
@@ -45,7 +45,7 @@ void File::showFile(int indicator, Musicians obj)
 
     fclose(file);
 }
-
+/*
 void File::showFile(int indicator, Genre obj)
 {
     FILE *file;
@@ -114,8 +114,9 @@ void File::showFile(int indicator, Country obj)
 
     fclose(file);
 }
-
+*/
 // Count Records
+
 int File::countRecords(int indicator)
 {
     FILE *p;
@@ -177,6 +178,7 @@ bool File::changeRecord(int index, Genre obj)
     return aux;
 }
 
+/*
 bool File::changeRecord(int index, Instrument obj)
 {
 
@@ -202,5 +204,5 @@ bool File::changeRecord(int index, Country obj)
 
     return aux;
 }
-
+*/
 #endif // FILE_H_INCLUDED

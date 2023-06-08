@@ -6,6 +6,7 @@ void menuMusicians()
     int option;
     bool condition = true;
     MusicianFile musiciansManager(MUSICIAN_FILE);
+    Musicians musician;
 
     while (condition)
     {
@@ -41,7 +42,7 @@ void menuMusicians()
             break;
         case 3:
             system("cls");
-            musiciansManager.showFile();
+            musiciansManager.showFile(1, musician);
             system("pause");
             break;
         case 4:

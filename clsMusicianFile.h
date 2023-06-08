@@ -7,7 +7,7 @@ private:
     char name[30];
 
 public:
-    MusicianFile(const char *name_) { strcpy(this->name, name_); };
+    MusicianFile(const char *name_ = "") { strcpy(this->name, name_); };
 
     void addRecord();
     void showFile();
