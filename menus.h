@@ -159,6 +159,150 @@ void genreMenu()
     }
 }
 
+void instrumentsMenu()
+{
+    int op;
+    bool condition = true;
+
+    while (condition)
+    {
+        system("cls");
+        cout << "         MENU GÉNEROS-";
+        cout << endl;
+        cout << "-------------------------------";
+        cout << endl;
+        cout << "1) AGREGAR GENERO";
+        cout << endl;
+        cout << "2) LISTAR GENERO POR ID";
+        cout << endl;
+        cout << "3) LISTAR TODO";
+        cout << endl;
+        cout << "4) MODIFICAR AÑO DE ORIGEN";
+        cout << endl;
+        cout << "5) ELIMINAR REGISTRO";
+        cout << endl;
+        cout << "-------------------------------";
+        cout << endl;
+        cout << "0) VOLVER AL MENU PRINCIPAL";
+        cout << endl;
+        cout << endl;
+        cout << "INGRESE OPCIÓN: ";
+        cin >> op;
+
+        switch (op)
+        {
+
+        case 1:
+            system("cls");
+            //  todo
+            system("pause");
+            break;
+        case 2:
+            system("cls");
+            //  todo
+            system("pause");
+            break;
+        case 3:
+            system("cls");
+            //  todo
+            system("pause");
+            break;
+
+        case 4:
+            system("cls");
+            //  todo
+            break;
+
+        case 5:
+            system("cls");
+            //  todo
+            system("pause");
+            break;
+
+        case 0:
+            condition = false;
+            std::cout << std::endl;
+            std::cout << "SALIENDO DEL MENU `INSTRUMENTOS`" << std::endl;
+            std::cout << std::endl;
+
+        default:
+            break;
+        }
+    }
+}
+
+void countriesMenu()
+{
+    int op;
+    bool condition = true;
+
+    while (condition)
+    {
+        system("cls");
+        cout << "         MENU GÉNEROS-";
+        cout << endl;
+        cout << "-------------------------------";
+        cout << endl;
+        cout << "1) AGREGAR GENERO";
+        cout << endl;
+        cout << "2) LISTAR GENERO POR ID";
+        cout << endl;
+        cout << "3) LISTAR TODO";
+        cout << endl;
+        cout << "4) MODIFICAR AÑO DE ORIGEN";
+        cout << endl;
+        cout << "5) ELIMINAR REGISTRO";
+        cout << endl;
+        cout << "-------------------------------";
+        cout << endl;
+        cout << "0) VOLVER AL MENU PRINCIPAL";
+        cout << endl;
+        cout << endl;
+        cout << "INGRESE OPCIÓN: ";
+        cin >> op;
+
+        switch (op)
+        {
+
+        case 1:
+            system("cls");
+            //  todo
+            system("pause");
+            break;
+        case 2:
+            system("cls");
+            //  todo
+            system("pause");
+            break;
+        case 3:
+            system("cls");
+            //  todo
+            system("pause");
+            break;
+
+        case 4:
+            system("cls");
+            //  todo
+            break;
+
+        case 5:
+            system("cls");
+            //  todo
+            system("pause");
+            break;
+
+        case 0:
+            condition = false;
+            std::cout << std::endl;
+            std::cout << "SALIENDO DEL MENU `PAÍSES`" << std::endl;
+            std::cout << std::endl;
+
+        default:
+            break;
+        }
+    }
+}
+
 void reportsMenu()
 {
     int option;
@@ -239,8 +383,10 @@ void mainMenu()
 
         std::cout << "1) MENU MUSICOS" << std::endl;
         std::cout << "2) MENU GENEROS" << std::endl;
-        std::cout << "3) REPORTES" << std::endl;
-        std::cout << "4) CONFIGURACIÓN" << std::endl;
+        std::cout << "3) MENU INSTRUMENTOS" << std::endl;
+        std::cout << "4) MENU PAÍSES" << std::endl;
+        std::cout << "5) REPORTES" << std::endl;
+        std::cout << "6) CONFIGURACIÓN" << std::endl;
         std::cout << std::endl;
         std::cout << "--------------------------------" << std::endl;
         std::cout << std::endl;
@@ -264,10 +410,20 @@ void mainMenu()
             break;
         case 3:
             system("cls");
-            reportsMenu();
+            instrumentsMenu();
             system("pause");
             break;
         case 4:
+            system("cls");
+            countriesMenu();
+            system("pause");
+            break;
+        case 5:
+            system("cls");
+            reportsMenu();
+            system("pause");
+            break;
+        case 6:
             system("cls");
             configurationMenu();
             system("pause");

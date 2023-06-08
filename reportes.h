@@ -24,7 +24,6 @@ void showPianist()
             std::cout << "Calustro: " << musician.getDepartment() << std::endl;
         }
     }
-    system("pause");
 
     fclose(pMusicians);
 }

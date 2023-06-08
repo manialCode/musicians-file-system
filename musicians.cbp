@@ -13,6 +13,7 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-g" />
+					<Add directory="include" />
 				</Compiler>
 			</Target>
 			<Target title="Release">
@@ -22,6 +23,7 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-O2" />
+					<Add directory="include" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -33,15 +35,23 @@
 			<Add option="-fexceptions" />
 		</Compiler>
 		<Unit filename="Date.h" />
+		<Unit filename="File.h" />
+		<Unit filename="clsCountry.h" />
+		<Unit filename="clsCountryFile.h" />
 		<Unit filename="clsGenre.h" />
 		<Unit filename="clsGenreFile.h" />
 		<Unit filename="clsGenres.h" />
+		<Unit filename="clsIntrument.h" />
+		<Unit filename="clsIntrumentFile.h" />
 		<Unit filename="clsMusician.h" />
 		<Unit filename="clsMusicianFile.h" />
+		<Unit filename="files.h" />
 		<Unit filename="functions.h" />
+		<Unit filename="include/File.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="menus.h" />
 		<Unit filename="reportes.h" />
+		<Unit filename="src/File.cpp" />
 		<Extensions>
 			<lib_finder disable_auto="1" />
 		</Extensions>
