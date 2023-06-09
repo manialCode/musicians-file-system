@@ -1,7 +1,7 @@
 #ifndef CLSGENREFILE_H_INCLUDED
 #define CLSGENREFILE_H_INCLUDED
 
-class GenreFile
+class GenreFile : public File
 {
 private:
     char name[30];
@@ -10,119 +10,107 @@ public:
     GenreFile(const char *name_) { strcpy(this->name, name_); };
 
     void addRecord();
-    void showFile();
     void listByID();
 
     Genre readRecord(int position);
     int getIDPosition(int index);
 
     bool changeOriginDate();
-    bool changeRecord(Genre obj, int pos);
     bool toCancel();
 };
 
 int GenreFile::getIDPosition(int index)
 {
-    Genre reg;
+    Genre genre;
     int pos = 0;
-    FILE *pGen;
+    FILE *file;
 
-    pGen = fopen(name, "rb");
-    if (pGen == NULL)
+    file = fopen(name, "rb");
+    if (file == NULL)
     {
         cout << "no se puedo abrir el archivo" << endl;
         return -2;
     }
-    while (fread(&reg, sizeof reg, 1, pGen) == 1)
+
+    int records = countRecords(2);
+    if (records > 0)
     {
-        if (reg.getId() == index)
+        for (int i = 0; i < records; i++)
         {
-            fclose(pGen);
-            return pos;
+            fread(&genre, sizeof genre, 1, file);
+            if (genre.getId() == index)
+            {
+                fclose(file);
+                return pos;
+            }
+            pos++;
         }
-        pos++;
     }
-    fclose(pGen);
+
+    fclose(file);
     return -1;
 }
 
 int ID = 0;
 void GenreFile::addRecord()
 {
-    Genre obj;
-    FILE *pGen;
-    pGen = fopen(name, "ab");
+    Genre genre;
+    FILE *file;
+    file = fopen(name, "ab");
 
-    if (pGen == NULL)
+    if (file == NULL)
     {
         std::cout << "NO SE PUDO ACCEDER/CREAR EL ARCHIVO" << std::endl;
         return;
     }
-    obj.setProperties();
+    genre.setProperties();
     ID++;
-    obj.setId(ID);
-    fwrite(&obj, sizeof(Genre), 1, pGen);
+    genre.setId(ID);
+    fwrite(&genre, sizeof(Genre), 1, file);
 
     std::cout << endl;
 
-    fclose(pGen);
-}
-
-void GenreFile::showFile()
-{
-    Genre obj;
-    FILE *filePointer;
-    filePointer = fopen(name, "rb");
-
-    if (filePointer == NULL)
-    {
-        cout << "NO SE PUDO ABRIR EL ARCHIVO" << endl;
-        return;
-    }
-
-    while (fread(&obj, sizeof obj, 1, filePointer) == 1)
-    {
-        if (obj.getState())
-            obj.showProperties();
-        std::cout << std::endl;
-    }
-    fclose(filePointer);
+    fclose(file);
 }
 
 void GenreFile::listByID()
 {
-    Genre obj;
-    int bid,
+    Genre genre;
+    int genreID,
         found = 0;
 
     std::cout << "INGRESE ID PARA BUSCAR GENERO: ";
-    std::cin >> bid;
+    std::cin >> genreID;
 
-    FILE *pGen;
-    pGen = fopen(name, "rb");
-    while (fread(&obj, sizeof(Genre), 1, pGen) == 1)
+    FILE *file;
+    file = fopen(name, "rb");
+
+    int records = countRecords(2);
+    if (records > 0)
     {
-        if (bid == obj.getId())
+        for (int i = 0; i < records; i++)
         {
-            obj.showProperties();
-            std::cout << endl;
-            found = 1;
+            fread(&genre, sizeof genre, 1, file);
+            if (genreID == genre.getId())
+            {
+                genre.showProperties();
+                std::cout << endl;
+                found = 1;
+            }
         }
     }
     if (found == 0)
-    {
         std::cout << "No se encontraron géneros con ese ID";
-    }
-    fclose(pGen);
 
+    fclose(file);
     std::cout << endl;
 }
 
 bool GenreFile::toCancel()
 {
-    int bid;
+    int genreID;
 
-    Genre instance;
+    Genre genre;
     FILE *filePointer;
     filePointer = fopen(name, "rb");
 
@@ -133,11 +121,11 @@ bool GenreFile::toCancel()
     }
 
     std::cout << "ID del genero a dar de baja: ";
-    std::cin >> bid;
+    std::cin >> genreID;
 
     system("cls");
 
-    int recordIndex = getIDPosition(bid);
+    int recordIndex = getIDPosition(genreID);
 
     if (recordIndex == -1)
     {
@@ -150,27 +138,14 @@ bool GenreFile::toCancel()
         return false;
     }
 
-    instance = readRecord(recordIndex);
-    if (instance.getState() == false)
+    genre = readRecord(recordIndex);
+    if (genre.getState() == false)
     {
         std::cout << "EL ID INGRESADO YA ESTA DADO DE BAJA" << std::endl;
         return false;
     }
-    instance.setState(false);
-    bool aux = changeRecord(instance, recordIndex);
-    return aux;
-}
-
-bool GenreFile::changeRecord(Genre obj, int pos)
-{
-    FILE *filePointer;
-    filePointer = fopen(name, "rb+");
-
-    int size = sizeof obj * pos;
-    fseek(filePointer, size, 0);
-    bool aux = fwrite(&obj, sizeof obj, 1, filePointer);
-    fclose(filePointer);
-
+    genre.setState(false);
+    bool aux = changeRecord(genre, recordIndex);
     return aux;
 }
 
@@ -205,19 +180,19 @@ Genre GenreFile::readRecord(int position)
 bool GenreFile::changeOriginDate()
 {
 
-    Genre reg;
-    int bid, year;
+    Genre genre;
+    int genreID, year;
 
     cout << "INGRESE ID PARA CAMBIAR EL AÑO: ";
-    cin >> bid;
+    cin >> genreID;
 
-    int pos = getIDPosition(bid);
-    reg = readRecord(pos);
+    int position = getIDPosition(genreID);
+    genre = readRecord(position);
 
     cout << "INGRESE ANIO NUEVO: ";
     cin >> year;
-    reg.setYear(year);
-    bool aux = changeRecord(reg, pos);
+    genre.setYear(year);
+    bool aux = changeRecord(genre, position);
 
     return aux;
 }

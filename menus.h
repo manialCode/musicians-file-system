@@ -42,7 +42,7 @@ void menuMusicians()
             break;
         case 3:
             system("cls");
-            musiciansManager.showFile(1, musician);
+            musiciansManager.showFile(musician, 1);
             system("pause");
             break;
         case 4:
@@ -84,7 +84,8 @@ void genreMenu()
 
     int op = 1;
     bool condition = true;
-    GenreFile obj(GENRES_FILE);
+    GenreFile genreManager(GENRES_FILE);
+    Genre genre;
 
     while (condition)
     {
@@ -116,23 +117,23 @@ void genreMenu()
 
         case 1:
             system("cls");
-            obj.addRecord();
+            genreManager.addRecord();
             system("pause");
             break;
         case 2:
             system("cls");
-            obj.listByID();
+            genreManager.listByID();
             system("pause");
             break;
         case 3:
             system("cls");
-            obj.showFile();
+            genreManager.showFile(genre, 2);
             system("pause");
             break;
 
         case 4:
             system("cls");
-            if (obj.changeOriginDate())
+            if (genreManager.changeOriginDate())
                 std::cout << "Cambio de fecha exitoso" << std::endl;
             else
                 std::cout << "No se ah podido realizar el cambio" << std::endl;
@@ -141,7 +142,7 @@ void genreMenu()
 
         case 5:
             system("cls");
-            if (obj.toCancel())
+            if (genreManager.toCancel())
                 std::cout << "Dado de baja con éxito" << std::endl;
             else
                 std::cout << "Ah habido un problema al dar de baja" << std::endl;
@@ -433,8 +434,6 @@ void mainMenu()
             condition = false;
             std::cout << std::endl;
             std::cout << "FIN DEL PROGRAMA" << std::endl;
-            std::cout << std::endl;
-            system("pause");
             break;
         default:
             break;

@@ -1,21 +1,18 @@
 #ifndef CLSMUSICIANFILE_H_INCLUDED
 #define CLSMUSICIANFILE_H_INCLUDED
 
-class MusicianFile
+class MusicianFile : public File
 {
 private:
     char name[30];
 
 public:
     MusicianFile(const char *name_ = "") { strcpy(this->name, name_); };
-
     void addRecord();
-    void showFile();
     void listByDni();
 
     Musicians readRecord(int position);
     bool changeAdmissionDate();
-    bool changeRecord(Musicians obj, int pos);
     bool toCancel();
 
     int getDniPosition(int dni);
@@ -23,7 +20,7 @@ public:
 
 void MusicianFile::addRecord()
 {
-    Musicians obj;
+    Musicians musician;
     FILE *filePointer;
     filePointer = fopen(name, "ab");
 
@@ -33,8 +30,8 @@ void MusicianFile::addRecord()
         return;
     }
 
-    obj.setProperties();
-    int objDNI = obj.getDni();
+    musician.setProperties();
+    int objDNI = musician.getDni();
 
     if (getDniPosition(objDNI) >= 0)
     {
@@ -44,46 +41,31 @@ void MusicianFile::addRecord()
         return;
     }
 
-    if (!(obj.getAdmissionDate().getIsValid()))
+    if (!(musician.getAdmissionDate().getIsValid()))
     {
         fclose(filePointer);
         return;
     }
 
-    if ((obj.getDepartment() > 0 && obj.getDepartment() < 5) && (obj.getMainInstrument() >= 1 && obj.getMainInstrument() <= 15) && (obj.getMusicType() >= 1 && obj.getMusicType() <= 10))
+    if (musician.getDepartment() < 1 || musician.getDepartment() > 4 ||
+        musician.getMainInstrument() < 1 || musician.getMainInstrument() > 15 ||
+        musician.getMusicType() < 1 || musician.getMusicType() > 10)
     {
-        fwrite(&obj, sizeof(Musicians), 1, filePointer);
-        std::cout << std::endl;
-        std::cout << "CARGA EXITOSA" << std::endl;
-        system("pause");
-    }
-
-    fclose(filePointer);
-}
-
-void MusicianFile::showFile()
-{
-    Musicians obj;
-    FILE *filePointer;
-    filePointer = fopen(name, "rb");
-    if (filePointer == NULL)
-    {
-        cout << "NO SE PUDO ABRIR EL ARCHIVO" << endl;
+        fclose(filePointer);
+        std::cout << "VALORES INVALIDOS, CARGA DENEGADA..." << std::endl;
         return;
     }
 
-    while (fread(&obj, sizeof obj, 1, filePointer) == 1)
-    {
-        if (obj.getState())
-            obj.showProperties();
-    }
+    fwrite(&musician, sizeof(Musicians), 1, filePointer);
+    std::cout << std::endl;
+    std::cout << "CARGA EXITOSA" << std::endl;
     fclose(filePointer);
 }
 
 void MusicianFile::listByDni()
 {
     int dni;
-    Musicians instance;
+    Musicians musician;
     FILE *filePointer;
     filePointer = fopen(MUSICIAN_FILE, "rb");
 
@@ -101,10 +83,12 @@ void MusicianFile::listByDni()
     int check = getDniPosition(dni);
     if (check >= 0)
     {
-        while (fread(&instance, sizeof instance, 1, filePointer) == 1)
+        int records = countRecords(1);
+        for (int i = 0; i < records; i++)
         {
-            if (instance.getDni() == dni && instance.getState())
-                instance.showProperties();
+            fread(&musician, sizeof musician, 1, filePointer);
+            if (musician.getDni() == dni && musician.getState())
+                musician.showProperties();
         }
     }
     else
@@ -114,7 +98,7 @@ void MusicianFile::listByDni()
 
 int MusicianFile::getDniPosition(int dni)
 {
-    Musicians obj;
+    Musicians musician;
     FILE *filePointer;
     filePointer = fopen(name, "rb");
 
@@ -126,9 +110,11 @@ int MusicianFile::getDniPosition(int dni)
         return -2;
     }
 
-    while (fread(&obj, sizeof obj, 1, filePointer) == 1)
+    int records = countRecords(1);
+    for (int i = 0; i < records; i++)
     {
-        if (obj.getDni() == dni)
+        fread(&musician, sizeof musician, 1, filePointer);
+        if (musician.getDni() == dni)
         {
             fclose(filePointer);
             return position;
@@ -219,18 +205,6 @@ bool MusicianFile::changeAdmissionDate()
         instance.setAdmissionDate();
 
     bool aux = changeRecord(instance, recordIndex);
-    return aux;
-}
-
-bool MusicianFile::changeRecord(Musicians obj, int pos)
-{
-    FILE *filePointer;
-    filePointer = fopen(name, "rb+");
-
-    fseek(filePointer, sizeof obj * pos, 0);
-    bool aux = fwrite(&obj, sizeof obj, 1, filePointer);
-    fclose(filePointer);
-
     return aux;
 }
 

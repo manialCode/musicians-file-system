@@ -9,56 +9,35 @@ private:
 public:
     File(const char *name_ = "") { strcpy(this->name, name_); };
 
-    void showFile(int indicator, Musicians obj);
-    /*void showFile(int indicator, Genre obj);
-     void showFile(int indicator, Instrument obj);
-     void showFile(int indicator, Country obj);
-*/
+    void showFile(Musicians obj, int indicator);
+    void showFile(Genre obj, int indicator);
+    /* void showFile(Instrument obj, int indicator);
+    void showFile(Country obj, int indicator);
+ */
     int countRecords(int indicator);
 
-    bool changeRecord(int index, Musicians obj);
-    bool changeRecord(int index, Genre obj);
-    // bool changeRecord(int index, Instrument obj);
-    // bool changeRecord(int index, Country obj);
+    bool changeRecord(Musicians obj, int index);
+    bool changeRecord(Genre obj, int index);
+    bool changeRecord(Instrument obj, int index);
+    bool changeRecord(Country obj, int index);
 };
 
 // Show Files
-void File::showFile(int indicator, Musicians obj)
+void File::showFile(Musicians obj, int indicator)
 {
     FILE *file;
-    file = fopen(name, "rb");
+    file = fopen(MUSICIAN_FILE, "rb");
+
     if (file == NULL)
     {
         cout << "NO SE PUDO ABRIR EL ARCHIVO" << endl;
         return;
     }
 
-    if (countRecords(indicator) > 0)
+    int records = countRecords(indicator);
+    if (records > 0)
     {
-        for (int i = 0; i < countRecords(indicator); i++)
-        {
-            fread(&obj, sizeof obj, 1, file);
-            if (obj.getState())
-                obj.showProperties();
-        }
-    }
-
-    fclose(file);
-}
-/*
-void File::showFile(int indicator, Genre obj)
-{
-    FILE *file;
-    file = fopen(name, "rb");
-    if (file == NULL)
-    {
-        cout << "NO SE PUDO ABRIR EL ARCHIVO" << endl;
-        return;
-    }
-
-    if (countRecords(indicator) > 0)
-    {
-        for (int i = 0; i < countRecords(indicator); i++)
+        for (int i = 0; i < records; i++)
         {
             fread(&obj, sizeof obj, 1, file);
             if (obj.getState())
@@ -69,10 +48,10 @@ void File::showFile(int indicator, Genre obj)
     fclose(file);
 }
 
-void File::showFile(int indicator, Instrument obj)
+void File::showFile(Genre obj, int indicator)
 {
     FILE *file;
-    file = fopen(name, "rb");
+    file = fopen(GENRES_FILE, "rb");
     if (file == NULL)
     {
         cout << "NO SE PUDO ABRIR EL ARCHIVO" << endl;
@@ -92,10 +71,10 @@ void File::showFile(int indicator, Instrument obj)
     fclose(file);
 }
 
-void File::showFile(int indicator, Country obj)
+/* void File::showFile(Instrument obj, int indicator)
 {
     FILE *file;
-    file = fopen(name, "rb");
+    file = fopen(INSTRUMENTS_FILE, "rb");
     if (file == NULL)
     {
         cout << "NO SE PUDO ABRIR EL ARCHIVO" << endl;
@@ -114,13 +93,47 @@ void File::showFile(int indicator, Country obj)
 
     fclose(file);
 }
-*/
+
+void File::showFile(Country obj, int indicator)
+{
+    FILE *file;
+    file = fopen(COUNTRIES_FILE, "rb");
+    if (file == NULL)
+    {
+        cout << "NO SE PUDO ABRIR EL ARCHIVO" << endl;
+        return;
+    }
+
+    if (countRecords(indicator) > 0)
+    {
+        for (int i = 0; i < countRecords(indicator); i++)
+        {
+            fread(&obj, sizeof obj, 1, file);
+            if (obj.getState())
+                obj.showProperties();
+        }
+    }
+
+    fclose(file);
+}
+ */
 // Count Records
 
 int File::countRecords(int indicator)
 {
     FILE *p;
-    p = fopen(name, "rb");
+    if (indicator == 1)
+        p = fopen(MUSICIAN_FILE, "rb");
+
+    if (indicator == 2)
+        p = fopen(GENRES_FILE, "rb");
+
+    if (indicator == 3)
+        p = fopen(INSTRUMENTS_FILE, "rb");
+
+    if (indicator == 4)
+        p = fopen(COUNTRIES_FILE, "rb");
+
     if (p == NULL)
         return -1;
     fseek(p, 0, 2);
@@ -152,11 +165,11 @@ int File::countRecords(int indicator)
 }
 
 // Change Records
-bool File::changeRecord(int index, Musicians obj)
+bool File::changeRecord(Musicians obj, int index)
 {
 
     FILE *file;
-    file = fopen(name, "rb+");
+    file = fopen(MUSICIAN_FILE, "rb+");
 
     fseek(file, sizeof obj * index, 0);
     bool aux = fwrite(&obj, sizeof obj, 1, file);
@@ -165,11 +178,11 @@ bool File::changeRecord(int index, Musicians obj)
     return aux;
 }
 
-bool File::changeRecord(int index, Genre obj)
+bool File::changeRecord(Genre obj, int index)
 {
 
     FILE *file;
-    file = fopen(name, "rb+");
+    file = fopen(GENRES_FILE, "rb+");
 
     fseek(file, sizeof obj * index, 0);
     bool aux = fwrite(&obj, sizeof obj, 1, file);
@@ -183,7 +196,7 @@ bool File::changeRecord(int index, Instrument obj)
 {
 
     FILE *file;
-    file = fopen(name, "rb+");
+    file = fopen(INSTRUMENT_FILE, "rb+");
 
     fseek(file, sizeof obj * index, 0);
     bool aux = fwrite(&obj, sizeof obj, 1, file);
@@ -196,7 +209,7 @@ bool File::changeRecord(int index, Country obj)
 {
 
     FILE *file;
-    file = fopen(name, "rb+");
+    file = fopen(COUNTRY_FILE, "rb+");
 
     fseek(file, sizeof obj * index, 0);
     bool aux = fwrite(&obj, sizeof obj, 1, file);
