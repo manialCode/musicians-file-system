@@ -9,20 +9,23 @@ private:
 public:
     File(const char *name_ = "") { strcpy(this->name, name_); };
 
+    // *Show Files
     void showFile(Musicians obj, int indicator);
     void showFile(Genre obj, int indicator);
     /* void showFile(Instrument obj, int indicator);
     void showFile(Country obj, int indicator);
  */
+    // *Count Records
     int countRecords(int indicator);
 
+    // *Change Records
     bool changeRecord(Musicians obj, int index);
     bool changeRecord(Genre obj, int index);
     bool changeRecord(Instrument obj, int index);
     bool changeRecord(Country obj, int index);
 };
 
-// Show Files
+// *Show Files
 void File::showFile(Musicians obj, int indicator)
 {
     FILE *file;
@@ -117,7 +120,7 @@ void File::showFile(Country obj, int indicator)
     fclose(file);
 }
  */
-// Count Records
+// *Count Records
 
 int File::countRecords(int indicator)
 {
@@ -164,7 +167,7 @@ int File::countRecords(int indicator)
     }
 }
 
-// Change Records
+// *Change Records
 bool File::changeRecord(Musicians obj, int index)
 {
 
