@@ -18,6 +18,9 @@ const char *INSTRUMENTS_BACK_UP = "Instumentos.bak";
 const char *COUNTRIES_FILE = "Paises.dat";
 const char *COUNTRIES_BACK_UP = "Paises.bak";
 
+const char *START_DATA_MUSICIAN = "Datos_de_inicio_musician.dat";
+const char *START_DATA_GENRES = "Datos_de_inicio_genres.dat";
+
 #include "functions.h"
 #include "Date.h"
 
@@ -34,6 +37,7 @@ const char *COUNTRIES_BACK_UP = "Paises.bak";
 #include "clsCountryFile.h"
 
 #include "reportes.h"
+#include "configuration.h"
 #include "menus.h"
 
 int main()

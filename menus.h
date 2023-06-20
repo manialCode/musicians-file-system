@@ -368,7 +368,66 @@ void reportsMenu()
 
 void configurationMenu()
 {
-    // TODO
+    int option;
+    bool condition = true;
+
+    while (condition)
+    {
+        system("cls");
+        std::cout << "MENU CONFIGURACIÓN" << std::endl;
+        std::cout << "------------------" << std::endl;
+        std::cout << std::endl;
+
+        std::cout << "1) COPIA DE SEGURIDAD DEL ARCHIVO DE MUSICOS" << std::endl;
+        std::cout << "2) COPIA DE SEGURIDAD DEL ARCHIVO DE GENEROS" << std::endl;
+        std::cout << "3) RESTAURAR EL ARCHIVO DE MUSICOS" << std::endl;
+        std::cout << "4) RESTAURAR EL ARCHIVO DE GENEROS" << std::endl;
+        std::cout << "5) ESTABLECER DATOS DE INICIO" << std::endl;
+        std::cout << std::endl;
+        std::cout << "--------------------------------" << std::endl;
+        std::cout << std::endl;
+        std::cout << "0) VOLVER AL MENU PRINCIPAL" << std::endl;
+
+        std::cout << std::endl;
+        std::cout << "Ingresa tu opción: ";
+        std::cin >> option;
+
+        switch (option)
+        {
+        case 1:
+            system("cls");
+            copyMusicians();
+            system("pause");
+            break;
+        case 2:
+            system("cls");
+            copyGenres();
+            system("pause");
+            break;
+        case 3:
+            system("cls");
+            restoreMusicians();
+            system("pause");
+            break;
+        case 4:
+            system("cls");
+            restoreGenres();
+            system("pause");
+            break;
+        case 5:
+            system("cls");
+            establishData();
+            system("pause");
+            break;
+        case 0:
+            condition = false;
+            std::cout << std::endl;
+            std::cout << "SALIENDO DEL MENU `CONFIGURACIÓN`" << std::endl;
+            break;
+        default:
+            break;
+        }
+    }
 }
 
 void mainMenu()
