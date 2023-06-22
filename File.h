@@ -12,9 +12,9 @@ public:
     // *Show Files
     void showFile(Musicians obj, int indicator);
     void showFile(Genre obj, int indicator);
-    /* void showFile(Instrument obj, int indicator);
+    void showFile(Instrument obj, int indicator);
     void showFile(Country obj, int indicator);
- */
+
     // *Count Records
     int countRecords(int indicator);
 
@@ -74,7 +74,7 @@ void File::showFile(Genre obj, int indicator)
     fclose(file);
 }
 
-/* void File::showFile(Instrument obj, int indicator)
+void File::showFile(Instrument obj, int indicator)
 {
     FILE *file;
     file = fopen(INSTRUMENTS_FILE, "rb");
@@ -119,7 +119,7 @@ void File::showFile(Country obj, int indicator)
 
     fclose(file);
 }
- */
+
 // *Count Records
 
 int File::countRecords(int indicator)
@@ -194,12 +194,11 @@ bool File::changeRecord(Genre obj, int index)
     return aux;
 }
 
-/*
-bool File::changeRecord(int index, Instrument obj)
+bool File::changeRecord(Instrument obj, int index)
 {
 
     FILE *file;
-    file = fopen(INSTRUMENT_FILE, "rb+");
+    file = fopen(INSTRUMENTS_FILE, "rb+");
 
     fseek(file, sizeof obj * index, 0);
     bool aux = fwrite(&obj, sizeof obj, 1, file);
@@ -208,11 +207,11 @@ bool File::changeRecord(int index, Instrument obj)
     return aux;
 }
 
-bool File::changeRecord(int index, Country obj)
+bool File::changeRecord(Country obj, int index)
 {
 
     FILE *file;
-    file = fopen(COUNTRY_FILE, "rb+");
+    file = fopen(COUNTRIES_FILE, "rb+");
 
     fseek(file, sizeof obj * index, 0);
     bool aux = fwrite(&obj, sizeof obj, 1, file);
@@ -220,5 +219,5 @@ bool File::changeRecord(int index, Country obj)
 
     return aux;
 }
-*/
+
 #endif // FILE_H_INCLUDED

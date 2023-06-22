@@ -31,9 +31,9 @@ const char *START_DATA_GENRES = "Datos_de_inicio_genres.dat";
 
 #include "File.h"
 
-#include "clsMusicianFile.h"
+#include "clsInstrumentFile.h"
 #include "clsGenreFile.h"
-#include "clsInstrument.h"
+#include "clsMusicianFile.h"
 #include "clsCountryFile.h"
 
 #include "reportes.h"

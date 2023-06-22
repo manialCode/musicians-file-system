@@ -53,6 +53,51 @@ void copyGenres()
     fclose(pGenresBak);
 }
 
+void copyInstruments()
+{
+    Instrument instrument;
+    FILE *instrument_file, *instrument_file_bk;
+    instrument_file = fopen(INSTRUMENTS_FILE, "rb");
+    instrument_file_bk = fopen(INSTRUMENTS_BACK_UP, "wb");
+
+    if (instrument_file == NULL || instrument_file_bk == NULL)
+    {
+        cout << "NO SE PUDO LEER EL ARCHIVO" << endl;
+        return;
+    }
+
+    while (fread(&instrument, sizeof instrument, 1, instrument_file) == 1)
+    {
+        fwrite(&instrument, sizeof instrument, 1, instrument_file_bk);
+    }
+    std::cout << "COPIA DE SEGURIDAD REALIZADA" << endl;
+    fclose(instrument_file);
+    fclose(instrument_file_bk);
+}
+
+void copyCountries()
+{
+    Country country;
+    FILE *countries_file, *countries_file_bk;
+
+    countries_file = fopen(COUNTRIES_FILE, "rb");
+    countries_file_bk = fopen(COUNTRIES_BACK_UP, "wb");
+
+    if (countries_file == NULL || countries_file_bk == NULL)
+    {
+        cout << "NO SE PUDO LEER EL ARCHIVO" << endl;
+        return;
+    }
+
+    while (fread(&country, sizeof country, 1, countries_file) == 1)
+    {
+        fwrite(&country, sizeof country, 1, countries_file_bk);
+    }
+    std::cout << "COPIA DE SEGURIDAD REALIZADA" << endl;
+    fclose(countries_file);
+    fclose(countries_file_bk);
+}
+
 void restoreMusicians()
 {
     Musicians musician;
@@ -103,6 +148,52 @@ void restoreGenres()
     std::cout << "ARCHIVO DE G�NEROS RESTAURADO" << endl;
     fclose(pGenres);
     fclose(pGenresBak);
+}
+
+void restoreInstruments()
+{
+    Instrument instrument;
+    FILE *instrument_file, *instrument_file_bk;
+
+    instrument_file = fopen(INSTRUMENTS_FILE, "rb");
+    instrument_file_bk = fopen(INSTRUMENTS_BACK_UP, "wb");
+
+    if (instrument_file == NULL || instrument_file_bk == NULL)
+    {
+        cout << "NO SE PUDO LEER EL ARCHIVO" << endl;
+        return;
+    }
+
+    while (fread(&instrument, sizeof instrument, 1, instrument_file_bk) == 1)
+    {
+        fwrite(&instrument, sizeof instrument, 1, instrument_file);
+    }
+    std::cout << "ARCHIVO DE MUSICOS RESTAURADO" << endl;
+    fclose(instrument_file);
+    fclose(instrument_file_bk);
+}
+
+void restoreCountries()
+{
+    Country country;
+    FILE *countries_file, *countries_file_bk;
+
+    countries_file = fopen(COUNTRIES_FILE, "rb");
+    countries_file_bk = fopen(COUNTRIES_BACK_UP, "wb");
+
+    if (countries_file == NULL || countries_file_bk == NULL)
+    {
+        cout << "NO SE PUDO LEER EL ARCHIVO" << endl;
+        return;
+    }
+
+    while (fread(&country, sizeof country, 1, countries_file_bk) == 1)
+    {
+        fwrite(&country, sizeof country, 1, countries_file);
+    }
+    std::cout << "COPIA DE SEGURIDAD REALIZADA" << endl;
+    fclose(countries_file);
+    fclose(countries_file_bk);
 }
 
 void establishData()

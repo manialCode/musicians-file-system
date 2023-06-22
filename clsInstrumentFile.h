@@ -1,44 +1,46 @@
-#ifndef CLSGENREFILE_H_INCLUDED
-#define CLSGENREFILE_H_INCLUDED
+#ifndef CLSINTRUMENTFILE_H_INCLUDED
+#define CLSINTRUMENTFILE_H_INCLUDED
 
-class GenreFile : public File
+int InstrumentFileID = 0;
+
+class InstrumentFile : public File
 {
 private:
     char name[30];
 
 public:
-    GenreFile(const char *name_) { strcpy(this->name, name_); };
+    InstrumentFile(const char *name_) { strcpy(this->name, name_); };
 
     void addRecord();
     void listByID();
 
-    Genre readRecord(int position);
+    Instrument readRecord(int position);
     int getIDPosition(int index);
 
-    bool changeOriginDate();
+    bool changeName();
     bool toCancel();
 };
 
-int GenreFile::getIDPosition(int index)
+int InstrumentFile::getIDPosition(int index)
 {
-    Genre genre;
+    Instrument instrument;
     int pos = 0;
     FILE *file;
 
     file = fopen(name, "rb");
     if (file == NULL)
     {
-        cout << "no se puedo abrir el archivo" << endl;
+        cout << "No se puedo abrir el archivo" << endl;
         return -2;
     }
 
-    int records = countRecords(2);
+    int records = countRecords(3);
     if (records > 0)
     {
         for (int i = 0; i < records; i++)
         {
-            fread(&genre, sizeof genre, 1, file);
-            if (genre.getId() == index)
+            fread(&instrument, sizeof instrument, 1, file);
+            if (instrument.getId() == index)
             {
                 fclose(file);
                 return pos;
@@ -51,10 +53,9 @@ int GenreFile::getIDPosition(int index)
     return -1;
 }
 
-int ID = 0;
-void GenreFile::addRecord()
+void InstrumentFile::addRecord()
 {
-    Genre genre;
+    Instrument instrument;
     FILE *file;
     file = fopen(name, "ab");
 
@@ -63,39 +64,24 @@ void GenreFile::addRecord()
         std::cout << "NO SE PUDO ACCEDER/CREAR EL ARCHIVO" << std::endl;
         return;
     }
-    genre.setProperties();
-    ID++;
-    genre.setId(ID);
-
-    Country country;
-    CountryFile countryFile(COUNTRIES_FILE);
-
-    int countriesCount = countryFile.countRecords(4);
-    for (int i = 0; i < countriesCount; i++)
-    {
-        country = countryFile.readRecord(i);
-        if (!(country.getId() == genre.getCountry()))
-        {
-            std::cout << "El país ingresado es inexistente..." << std::endl;
-            fclose(file);
-            return;
-        }
-    }
-    fwrite(&genre, sizeof(Genre), 1, file);
+    instrument.setProperties();
+    InstrumentFileID = InstrumentFileID + 1;
+    instrument.setId(InstrumentFileID);
+    fwrite(&instrument, sizeof(Instrument), 1, file);
 
     std::cout << endl;
 
     fclose(file);
 }
 
-void GenreFile::listByID()
+void InstrumentFile::listByID()
 {
-    Genre genre;
-    int genreID,
+    Instrument instrument;
+    int instrumentID,
         found = 0;
 
-    std::cout << "INGRESE ID PARA BUSCAR GENERO: ";
-    std::cin >> genreID;
+    std::cout << "INGRESE ID DEL INTRUMENTO: ";
+    std::cin >> instrumentID;
 
     FILE *file;
     file = fopen(name, "rb");
@@ -105,10 +91,10 @@ void GenreFile::listByID()
     {
         for (int i = 0; i < records; i++)
         {
-            fread(&genre, sizeof genre, 1, file);
-            if (genreID == genre.getId())
+            fread(&instrument, sizeof instrument, 1, file);
+            if (instrumentID == instrument.getId())
             {
-                genre.showProperties();
+                instrument.showProperties();
                 std::cout << endl;
                 found = 1;
             }
@@ -121,11 +107,31 @@ void GenreFile::listByID()
     std::cout << endl;
 }
 
-bool GenreFile::toCancel()
+bool InstrumentFile::changeName()
 {
-    int genreID;
+    Instrument instrument;
+    int instrumentID;
+    char newName[30];
 
-    Genre genre;
+    cout << "INGRESE ID PARA CAMBIAR EL AÑO: ";
+    cin >> instrumentID;
+
+    int position = getIDPosition(instrumentID);
+    instrument = readRecord(position);
+
+    cout << "INGRESE NOMBRE NUEVO: ";
+    loadChar(newName, 30);
+    instrument.setName(newName);
+    bool aux = changeRecord(instrument, position);
+
+    return aux;
+}
+
+bool InstrumentFile::toCancel()
+{
+    int intrumentID;
+
+    Instrument instrument;
     FILE *filePointer;
     filePointer = fopen(name, "rb");
 
@@ -136,11 +142,11 @@ bool GenreFile::toCancel()
     }
 
     std::cout << "ID del genero a dar de baja: ";
-    std::cin >> genreID;
+    std::cin >> intrumentID;
 
     system("cls");
 
-    int recordIndex = getIDPosition(genreID);
+    int recordIndex = getIDPosition(intrumentID);
 
     if (recordIndex == -1)
     {
@@ -153,20 +159,20 @@ bool GenreFile::toCancel()
         return false;
     }
 
-    genre = readRecord(recordIndex);
-    if (genre.getState() == false)
+    instrument = readRecord(recordIndex);
+    if (!(instrument.getState()))
     {
         std::cout << "EL ID INGRESADO YA ESTA DADO DE BAJA" << std::endl;
         return false;
     }
-    genre.setState(false);
-    bool aux = changeRecord(genre, recordIndex);
+    instrument.setState(false);
+    bool aux = changeRecord(instrument, recordIndex);
     return aux;
 }
 
-Genre GenreFile::readRecord(int position)
+Instrument InstrumentFile::readRecord(int position)
 {
-    Genre obj;
+    Instrument obj;
     if (position < 0)
     {
         obj.setId(-3);
@@ -191,25 +197,4 @@ Genre GenreFile::readRecord(int position)
 
     return obj;
 }
-
-bool GenreFile::changeOriginDate()
-{
-
-    Genre genre;
-    int genreID, year;
-
-    cout << "INGRESE ID PARA CAMBIAR EL AÑO: ";
-    cin >> genreID;
-
-    int position = getIDPosition(genreID);
-    genre = readRecord(position);
-
-    cout << "INGRESE ANIO NUEVO: ";
-    cin >> year;
-    genre.setYear(year);
-    bool aux = changeRecord(genre, position);
-
-    return aux;
-}
-
-#endif // CLSGENREFILE_H_INCLUDED
+#endif // CLSINTRUMENTFILE_H_INCLUDED

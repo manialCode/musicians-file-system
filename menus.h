@@ -163,23 +163,25 @@ void genreMenu()
 
 void instrumentsMenu()
 {
+    Instrument instrument;
+    InstrumentFile instrumentFile(INSTRUMENTS_FILE);
     int op;
     bool condition = true;
 
     while (condition)
     {
         system("cls");
-        cout << "         MENU GÉNEROS-";
+        cout << "         MENU INSTRUMENTOS-";
         cout << endl;
         cout << "-------------------------------";
         cout << endl;
-        cout << "1) AGREGAR GENERO";
+        cout << "1) AGREGAR INSTRUMENTO";
         cout << endl;
-        cout << "2) LISTAR GENERO POR ID";
+        cout << "2) LISTAR INSTRUMENTO POR ID";
         cout << endl;
         cout << "3) LISTAR TODO";
         cout << endl;
-        cout << "4) MODIFICAR AÑO DE ORIGEN";
+        cout << "4) MODIFICAR NOMBRE";
         cout << endl;
         cout << "5) ELIMINAR REGISTRO";
         cout << endl;
@@ -196,28 +198,34 @@ void instrumentsMenu()
 
         case 1:
             system("cls");
-            //  todo
+            instrumentFile.addRecord();
             system("pause");
             break;
         case 2:
             system("cls");
-            //  todo
+            instrumentFile.listByID();
             system("pause");
             break;
         case 3:
             system("cls");
-            //  todo
+            instrumentFile.showFile(instrument, 3);
             system("pause");
             break;
 
         case 4:
             system("cls");
-            //  todo
+            if (instrumentFile.changeName())
+                std::cout << "Cambio de nombre exitoso" << std::endl;
+            else
+                std::cout << "No se ah podido realizar el cambio" << std::endl;
             break;
 
         case 5:
             system("cls");
-            //  todo
+            if (instrumentFile.toCancel())
+                std::cout << "Registro dado de baja" << std::endl;
+            else
+                std::cout << "No se ah podido dar de baja" << std::endl;
             system("pause");
             break;
 
@@ -241,13 +249,13 @@ void countriesMenu()
     while (condition)
     {
         system("cls");
-        cout << "         MENU GÉNEROS-";
+        cout << "         MENU PAISES-";
         cout << endl;
         cout << "-------------------------------";
         cout << endl;
-        cout << "1) AGREGAR GENERO";
+        cout << "1) AGREGAR PAIS";
         cout << endl;
-        cout << "2) LISTAR GENERO POR ID";
+        cout << "2) LISTAR PAIS POR ID";
         cout << endl;
         cout << "3) LISTAR TODO";
         cout << endl;

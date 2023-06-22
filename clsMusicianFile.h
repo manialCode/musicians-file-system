@@ -1,6 +1,9 @@
 #ifndef CLSMUSICIANFILE_H_INCLUDED
 #define CLSMUSICIANFILE_H_INCLUDED
 
+// #include "clsInstrument.h"
+// #include "clsMusicianFile.h"
+
 class MusicianFile : public File
 {
 private:
@@ -45,6 +48,21 @@ void MusicianFile::addRecord()
     {
         fclose(filePointer);
         return;
+    }
+
+    Instrument instrument;
+    InstrumentFile instrumentFile(INSTRUMENTS_FILE);
+
+    int instrumentsCount = instrumentFile.countRecords(3);
+    for (int i = 0; i < instrumentsCount; i++)
+    {
+        instrument = instrumentFile.readRecord(i);
+        if (!(instrument.getId() == musician.getMainInstrument()))
+        {
+            std::cout << "El instrumento ingresado es inexistente..." << std::endl;
+            fclose(filePointer);
+            return;
+        }
     }
 
     if (musician.getDepartment() < 1 || musician.getDepartment() > 4 ||

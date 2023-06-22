@@ -1,7 +1,7 @@
 #ifndef CLSCOUNTRYFILE_H_INCLUDED
 #define CLSCOUNTRYFILE_H_INCLUDED
 
-class CountryFile
+class CountryFile : public File
 {
 private:
     /* data */
