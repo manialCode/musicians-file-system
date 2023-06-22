@@ -388,9 +388,13 @@ void configurationMenu()
 
         std::cout << "1) COPIA DE SEGURIDAD DEL ARCHIVO DE MUSICOS" << std::endl;
         std::cout << "2) COPIA DE SEGURIDAD DEL ARCHIVO DE GENEROS" << std::endl;
-        std::cout << "3) RESTAURAR EL ARCHIVO DE MUSICOS" << std::endl;
-        std::cout << "4) RESTAURAR EL ARCHIVO DE GENEROS" << std::endl;
-        std::cout << "5) ESTABLECER DATOS DE INICIO" << std::endl;
+        std::cout << "5) COPIA DE SEGURIDAD DEL ARCHIVO DE INSTRUMENTOS" << std::endl;
+        std::cout << "4) COPIA DE SEGURIDAD DEL ARCHIVO DE PAISES" << std::endl;
+        std::cout << "6) RESTAURAR EL ARCHIVO DE MUSICOS" << std::endl;
+        std::cout << "7) RESTAURAR EL ARCHIVO DE GENEROS" << std::endl;
+        std::cout << "8) RESTAURAR EL ARCHIVO DE INSTRUMENTOS" << std::endl;
+        std::cout << "6) RESTAURAR EL ARCHIVO DE PAISES" << std::endl;
+        std::cout << "10) ESTABLECER DATOS DE INICIO" << std::endl;
         std::cout << std::endl;
         std::cout << "--------------------------------" << std::endl;
         std::cout << std::endl;
@@ -414,15 +418,40 @@ void configurationMenu()
             break;
         case 3:
             system("cls");
-            restoreMusicians();
+            copyInstruments();
             system("pause");
             break;
         case 4:
             system("cls");
-            restoreGenres();
+            copyCountries();
             system("pause");
             break;
         case 5:
+            system("cls");
+            restoreMusicians();
+            system("pause");
+            break;
+        case 6:
+            system("cls");
+            restoreGenres();
+            system("pause");
+            break;
+        case 7:
+            system("cls");
+            restoreInstruments();
+            system("pause");
+            break;
+        case 8:
+            system("cls");
+            restoreInstruments();
+            system("pause");
+            break;
+        case 9:
+            system("cls");
+            restoreCountries();
+            system("pause");
+            break;
+        case 10:
             system("cls");
             establishData();
             system("pause");
